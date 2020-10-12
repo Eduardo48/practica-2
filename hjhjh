@@ -1,0 +1,84 @@
+#include<stdio.h>
+float promedio(float *c,int a);
+float edad(float *c,int a);
+float tabla(float *f[30],float *f1[30],float *f2[30],int a);
+int main(){
+    float *m,*m1,suma=0,suma1=0;
+    int i,d,k=0,h=0,a;
+    float l[30];
+    float b[30][2];
+    float *f[30],*f1[30];
+    float *f2[30];
+    m=&suma;
+    m1=&suma1;
+    printf("Cuantos alumnos desea ingresar\n");
+    scanf("%d",&a);
+    for(i=0;i<a;i++){
+        printf("Ingrese los datos del ALUMNO %d\n",i+1);
+        for(d=0;d<3;d++){
+           if(d==0){
+               printf("Ingrese el numero de cuenta\n");
+               fflush(stdin);
+               scanf("%f",&l[i]);
+                f2[i+1]=&l[i];
+               
+           }
+           if(d==1){
+               printf("edad\n");
+               scanf("%f",&b[i][d]);
+               f[i+1]=&b[i][d];
+           } 
+           if(d==2){
+               printf("Ingrese las calificaciones(un rango de 0 a 10)\n");
+               scanf("%f",&b[i][d]);
+               if(b[i][d]<0 || b[i][d]>10){
+                   printf("Rango no aceptado no aceptado revise sus datos,vuelva a iniciar el programa");
+                   return 0;
+            }
+               else{
+                   suma=suma+b[i][d];
+                   f1[i+1]=&b[i][d];
+                   k++;
+                   if(b[i][d]>=6){
+                       suma1=suma1+b[i][d-1];
+                       h++;
+                       }
+               }
+           }
+        }
+    }
+    tabla(f,f1,f2,a);
+     promedio(m,k);
+    edad(m1,h);
+}
+
+
+ float promedio(float *c,int a){
+     float y;
+     y=*c/a;
+     printf("El promedio del salon es \t %f\n",y);
+}
+
+float edad(float *c1,int a1){
+    float y;
+    if(a1==0){
+        printf("Ningun alumno tuvo una calificacion mayor o igual a 6\n");
+        return 0 ;
+    }
+    else{
+        y=*c1/a1;
+        printf("La edad promedio con una calificacion mayor o igual a 6 es \t %f\n",y);
+    }
+
+}
+
+float tabla(float *f[30],float *f1[30],float *f2[30],int a3){
+    int i;
+     printf("Los datos que ingreso fueron\n ALUMNO\t\t Calificacion\t\tedad\t\tnumero de cuenta\n");
+     for(i=1;i<=a3;i++){
+         printf("Alumno %d\t",i);
+         printf("%f\t\t",*f1[i]);
+         printf("%.0f\t\t",*f[i]);
+         printf("%.0f\n",*f2[i]);
+               }
+     }
